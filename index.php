@@ -37,6 +37,8 @@ $graph1=json_decode($graph_content1);
 
 $name=$graph1->name;
 $id=$graph1->id;
+$message_to_reply="$name - $id"
+
 }
 if (strpos($message, 'https://www.facebook.com/groups') !== false) {
 $phanloai="";
@@ -50,6 +52,7 @@ $graphg=json_decode($graph_contentg);
 $idg=$graphg->data[0]->id;
 $nameg=$graphg->data[0]->name;
 $gtype=$graphg->data[0]->privacy;
+$message_to_reply="$nameg - $idg"
 }
 
 
