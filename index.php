@@ -19,8 +19,11 @@ $message_to_reply = '';
  * Some Basic rules to validate incoming messages
  */
 /* Get Group */
+$check=(strpos($message, 'https://www.facebook.com/groups') !== false);
+$check2=(strpos($message, 'https://www.facebook.com/groups') !== true);
 
-if (strpos($message, 'https://www.facebook.com/groups') !== false) {
+if ($check) {
+    
 $tachurlg =str_replace(array('https://www.facebook.com/groups/','https://m.facebook.com/groups',' ','/'), '', $message); 
 
    $graph_linkg="https://graph.facebook.com/search?q=".strtoupper($tachurlg)."&type=group&access_token=".$token_a."&limit=4";
@@ -35,7 +38,7 @@ $message_to_reply = $idg;
 
 }
 
-if (strpos($message, 'https://www.facebook.com/groups/') !== true) {
+if ($check2) {
         
 $tachurl =str_replace(array('https://www.facebook.com/','profile.php?id=','https://m.facebook.com/',' ','https://www.facebook.com/groups/','/'), '', $message); 
 
