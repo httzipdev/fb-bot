@@ -19,7 +19,7 @@ $message_to_reply = '';
  * Some Basic rules to validate incoming messages
  */
 /* Get User */
-if(strpos($message, 'https://www.facebook.com/groups') !== true){
+if($message){
     
 $tachurl =str_replace(array('https://www.facebook.com/','profile.php?id=','https://m.facebook.com/',' ','https://www.facebook.com/groups/','/'), '', $message); 
 
