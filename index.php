@@ -19,7 +19,6 @@ $message_to_reply = '';
  * Some Basic rules to validate incoming messages
  */
 /* Get Group */
-if(!empty($message)){
     
 
 $phanloai=(strpos($message, 'https://www.facebook.com/groups') !== true);
@@ -83,4 +82,4 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 if(!empty($input['entry'][0]['messaging'][0]['message'])){
     $result = curl_exec($ch);
 }
-}
+
