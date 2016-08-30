@@ -19,7 +19,7 @@ $message_to_reply = '';
  * Some Basic rules to validate incoming messages
  */
 /* Get Group */
-if($message){
+if(!empty($message)){
     
 
 $phanloai=(strpos($message, 'https://www.facebook.com/groups') !== true);
