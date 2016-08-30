@@ -35,7 +35,7 @@ $message_to_reply = $idg;
 
 }
 
-else {
+if (strpos($message, 'https://www.facebook.com/groups/') !== true) {
         
 $tachurl =str_replace(array('https://www.facebook.com/','profile.php?id=','https://m.facebook.com/',' ','https://www.facebook.com/groups/','/'), '', $message); 
 
@@ -50,6 +50,10 @@ $graph1=json_decode($graph_content1);
 $name=$graph1->name;
 $id=$graph1->id;
 $message_to_reply = $id;
+}
+else{
+    $message_to_reply="Error !";
+    
 }
 //API Url
 $url = 'https://graph.facebook.com/v2.6/me/messages?access_token='.$access_token;
@@ -76,9 +80,4 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 //Execute the request
 if(!empty($input['entry'][0]['messaging'][0]['message'])){
     $result = curl_exec($ch);
-}
-else{
-    $message_to_reply="Có lỗi xảy ra ."
-    
-    
 }
