@@ -19,10 +19,10 @@ $message_to_reply = '';
  * Some Basic rules to validate incoming messages
  */
 /* Get Group */
-$check=(strpos($message, 'https://www.facebook.com/groups') !== false);
-$check2=(strpos($message, 'https://www.facebook.com/groups') !== true);
+$check1=(strpos($message, 'https://www.facebook.com/groups/') !== false);
+$check2=(strpos($message, 'https://www.facebook.com/groups/') !== true);
 
-if ($check) {
+if ($check1) {
     
 $tachurlg =str_replace(array('https://www.facebook.com/groups/','https://m.facebook.com/groups',' ','/'), '', $message); 
 
@@ -34,7 +34,7 @@ $graphg=json_decode($graph_contentg);
 $idg=$graphg->data[0]->id;
 $nameg=$graphg->data[0]->name;
 $gtype=$graphg->data[0]->privacy;
-$message_to_reply = $idg;
+$message_to_reply = "$nameg - $idg";
 
 }
 
@@ -52,7 +52,7 @@ $graph1=json_decode($graph_content1);
 
 $name=$graph1->name;
 $id=$graph1->id;
-$message_to_reply = $id;
+$message_to_reply = "$name - $id";
 }
 else{
     $message_to_reply="Error !";
