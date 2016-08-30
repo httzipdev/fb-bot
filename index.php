@@ -19,8 +19,8 @@ $message_to_reply = '';
  * Some Basic rules to validate incoming messages
  */
 /* Get Group */
-$check1=(strpos($message, 'https://www.facebook.com/groups/') !== true);
-$check2=(strpos($message, 'https://www.facebook.com/groups/') !== false);
+$check1=(strpos($message, 'https://www.facebook.com/groups') !== false);
+$check2=(strpos($message, 'https://www.facebook.com/groups') !== true);
 
 if ($check1) {
     
