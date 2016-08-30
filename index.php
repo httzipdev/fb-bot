@@ -18,23 +18,6 @@ $message_to_reply = '';
 /**
  * Some Basic rules to validate incoming messages
  */
-/* Get User */
-if($message){
-    
-$tachurl =str_replace(array('https://www.facebook.com/','profile.php?id=','https://m.facebook.com/',' ','https://www.facebook.com/groups/','/'), '', $message); 
-
-$idlink = end((explode('/', $tachurl)));
-
-
-$graph_link1="https://graph.facebook.com/".$idlink."?fields=name,id&access_token=".$token_a;
-
-$graph_content1=file_get_contents($graph_link1);
-$graph1=json_decode($graph_content1);
-
-$name=$graph1->name;
-$id=$graph1->id;
-$message_to_reply = $id;
-}
 /* Get Group */
 
 if (strpos($message, 'https://www.facebook.com/groups') !== false) {
@@ -53,7 +36,20 @@ $message_to_reply = $idg;
 }
 
 else {
-    $message_to_reply = 'Ý bạn là gì vậy? hãy thử lại ...';
+        
+$tachurl =str_replace(array('https://www.facebook.com/','profile.php?id=','https://m.facebook.com/',' ','https://www.facebook.com/groups/','/'), '', $message); 
+
+$idlink = end((explode('/', $tachurl)));
+
+
+$graph_link1="https://graph.facebook.com/".$idlink."?fields=name,id&access_token=".$token_a;
+
+$graph_content1=file_get_contents($graph_link1);
+$graph1=json_decode($graph_content1);
+
+$name=$graph1->name;
+$id=$graph1->id;
+$message_to_reply = $id;
 }
 //API Url
 $url = 'https://graph.facebook.com/v2.6/me/messages?access_token='.$access_token;
@@ -80,4 +76,9 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 //Execute the request
 if(!empty($input['entry'][0]['messaging'][0]['message'])){
     $result = curl_exec($ch);
+}
+else{
+    $message_to_reply="Có lỗi xảy ra ."
+    
+    
 }
