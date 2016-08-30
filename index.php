@@ -18,14 +18,7 @@ $message_to_reply = '';
 /**
  * Some Basic rules to validate incoming messages
  */
-if(preg_match('[time|current time|now]', strtolower($message))) {
-    // Make request to Time API
-    ini_set('user_agent','Mozilla/4.0 (compatible; MSIE 6.0)');
-    $result = file_get_contents("http://www.timeapi.org/utc/now?format=%25a%20%25b%20%25d%20%25I:%25M:%25S%20%25Y");
-    if($result != '') {
-        $message_to_reply = $result;
-    }
-} 
+
 if(preg_match('[hello|hi|xin chao]', strtolower($message))) {
 $message_to_reply ="Xin chào,bạn cần giúp gì nào?";
 
@@ -51,7 +44,6 @@ $message_to_reply = $id;
 /* Get Group */
 
 if (strpos($message, 'https://www.facebook.com/groups') !== false) {
-$phanloai="";
 $tachurlg =str_replace(array('https://www.facebook.com/groups/','https://m.facebook.com/groups',' ','/'), '', $message); 
 
    $graph_linkg="https://graph.facebook.com/search?q=".strtoupper($tachurlg)."&type=group&access_token=".$token_a."&limit=4";
