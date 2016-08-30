@@ -53,7 +53,7 @@ $nameg=$graphg->data[0]->name;
 $gtype=$graphg->data[0]->privacy;
 $message_to_reply="$nameg - $idg";
 }
-if(empty($id) || empty($idg)){
+if(empty($id) && empty($idg)){
     
     $message_to_reply="Không tìm thấy dữ liệu nào .";
 
