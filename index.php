@@ -24,8 +24,7 @@ $message_to_reply ="Xin chào,bạn cần giúp gì nào?";
 
 }
 /* Get User */
-if(strpos($message, 'https://www.facebook.com/groups') !== true){
-    
+if(preg_match('[https://www.facebook.com/]', strtolower($message))) {
     
 $tachurl =str_replace(array('https://www.facebook.com/','profile.php?id=','https://m.facebook.com/',' ','https://www.facebook.com/groups/','/'), '', $message); 
 
@@ -43,7 +42,7 @@ $message_to_reply = $id;
 }
 /* Get Group */
 
-if (strpos($message, 'https://www.facebook.com/groups') !== false) {
+if(preg_match('[https://www.facebook.com/groups/]', strtolower($message))) {
 $tachurlg =str_replace(array('https://www.facebook.com/groups/','https://m.facebook.com/groups',' ','/'), '', $message); 
 
    $graph_linkg="https://graph.facebook.com/search?q=".strtoupper($tachurlg)."&type=group&access_token=".$token_a."&limit=4";
