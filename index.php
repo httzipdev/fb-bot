@@ -54,11 +54,6 @@ $gtype=$graphg->data[0]->privacy;
 $message_to_reply="$nameg - $idg";
 }
 
-else{
- $message_to_reply="Không tìm thấy dữ liệu nào .";
-
-    
-}
  
 //API Url
 $url = 'https://graph.facebook.com/v2.6/me/messages?access_token='.$access_token;
