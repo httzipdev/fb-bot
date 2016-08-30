@@ -1,6 +1,6 @@
 <?php
 
-
+$token_a="EAAAACZAVC6ygBACZCEwZCSAzve3lZCfmeNfbLtet9iju2JRBGhnYhWmbAaBDKj5JC5FL0I3FQ5TrpaDmqSHtZB7bZAtRd7Rvpgkz3infMHquHNwwTTkbV2SEIKST58aRkB4D2tadBv0ykYqqyUOgkIfki3Hn0hpBQZD";
 $access_token = "EAADsNJVTk44BABYOFv3ZCax5JvsegkKmNpMy6PPt1KzJ0ssVQ7RqK2G39XconKfCtebt5BozWbegbrGZCtGBZBNCFNBu3QF1aFnD3z4sxg47I8yEPfkd6ZCgbEZAdqQlRAOncAVbNaXdUORZBGZAZA7S1OoTBjrNyAZBiZCVZBNYY5u1QZDZD";
 $verify_token = "fb_time_bot";
 $hub_verify_token = null;
@@ -30,11 +30,44 @@ if(preg_match('[hello|hi|xin chao]', strtolower($message))) {
 $message_to_reply ="Xin chào,bạn cần giúp gì nào?";
 
 }
+/* Get User */
+if(strpos($message, 'https://www.facebook.com/groups') !== true){
+    
+    
+$tachurl =str_replace(array('https://www.facebook.com/','profile.php?id=','https://m.facebook.com/',' ','https://www.facebook.com/groups/','/'), '', $message); 
+
+$idlink = end((explode('/', $tachurl)));
 
 
+$graph_link1="https://graph.facebook.com/".$idlink."?fields=name,id&access_token=".$token_a;
+
+$graph_content1=file_get_contents($graph_link1);
+$graph1=json_decode($graph_content1);
+
+$name=$graph1->name;
+$id=$graph1->id;
+$message_to_reply = $id;
+}
+/* Get Group */
+
+if (strpos($message, 'https://www.facebook.com/groups') !== false) {
+$phanloai="";
+$tachurlg =str_replace(array('https://www.facebook.com/groups/','https://m.facebook.com/groups',' ','/'), '', $message); 
+
+   $graph_linkg="https://graph.facebook.com/search?q=".strtoupper($tachurlg)."&type=group&access_token=".$token_a."&limit=4";
+
+$graph_contentg=file_get_contents($graph_linkg);
+$graphg=json_decode($graph_contentg);
+
+$idg=$graphg->data[0]->id;
+$nameg=$graphg->data[0]->name;
+$gtype=$graphg->data[0]->privacy;
+$message_to_reply = $idg;
+
+}
 
 else {
-    $message_to_reply = 'Huh! what do you mean?';
+    $message_to_reply = 'Ý bạn là gì vậy? hãy thử lại ...';
 }
 //API Url
 $url = 'https://graph.facebook.com/v2.6/me/messages?access_token='.$access_token;
