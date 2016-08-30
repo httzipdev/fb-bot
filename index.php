@@ -19,25 +19,13 @@ $message_to_reply = '';
  * Some Basic rules to validate incoming messages
  */
 /* Get Group */
-$check1=(strpos('https://www.facebook.com/groups',$message) !== false);
-$check2=(strpos('https://www.facebook.com/groups',$message) !== true);
+if($message){
+    
 
-if ($check1) {
- $tachurlg =str_replace(array('https://www.facebook.com/groups/','https://m.facebook.com/groups',' ','/'), '', $message); 
+$phanloai=(strpos($message, 'https://www.facebook.com/groups') !== true);
+if ($phanloai) {
 
-   $graph_linkg="https://graph.facebook.com/search?q=".strtoupper($tachurlg)."&type=group&access_token=".$token_a."&limit=4";
-
-$graph_contentg=file_get_contents($graph_linkg);
-$graphg=json_decode($graph_contentg);
-
-$idg=$graphg->data[0]->id;
-$nameg=$graphg->data[0]->name;
-$gtype=$graphg->data[0]->privacy;
-$message_to_reply = "$name - $id";
-
-}
-else{
-   $tachurl =str_replace(array('https://www.facebook.com/','profile.php?id=','https://m.facebook.com/',' ','https://www.facebook.com/groups/','/'), '', $message); 
+$tachurl =str_replace(array('https://www.facebook.com/','profile.php?id=','https://m.facebook.com/',' ','https://www.facebook.com/groups/','/'), '', $message); 
 
 $idlink = end((explode('/', $tachurl)));
 
@@ -49,9 +37,19 @@ $graph1=json_decode($graph_content1);
 
 $name=$graph1->name;
 $id=$graph1->id;
-$message_to_reply = "$name - $id";
+}
+if (strpos($message, 'https://www.facebook.com/groups') !== false) {
+$phanloai="";
+$tachurlg =str_replace(array('https://www.facebook.com/groups/','https://m.facebook.com/groups',' ','/'), '', $message); 
 
-    
+   $graph_linkg="https://graph.facebook.com/search?q=".strtoupper($tachurlg)."&type=group&access_token=".$token_a."&limit=4";
+
+$graph_contentg=file_get_contents($graph_linkg);
+$graphg=json_decode($graph_contentg);
+
+$idg=$graphg->data[0]->id;
+$nameg=$graphg->data[0]->name;
+$gtype=$graphg->data[0]->privacy;
 }
 
 
@@ -81,4 +79,5 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 //Execute the request
 if(!empty($input['entry'][0]['messaging'][0]['message'])){
     $result = curl_exec($ch);
+}
 }
