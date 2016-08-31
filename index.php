@@ -40,6 +40,10 @@ if(!empty($id))
 {
 $message_to_reply="$name - $id";
 }
+if(empty($id))
+{
+$message_to_reply="User Not Found !";
+}
 }
 if (strpos($message, 'https://www.facebook.com/groups') !== false) {
 $phanloai="";
@@ -57,7 +61,10 @@ if(!empty($id))
 {
 $message_to_reply="$nameg - $idg";
 }
-    
+    if(empty($id))
+{
+$message_to_reply="User Not Found !";
+}
 }
 
  
