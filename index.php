@@ -63,7 +63,7 @@ $message_to_reply="$nameg - $idg";
 }
     if(empty($id))
 {
-$message_to_reply="User Not Found !";
+$message_to_reply="Group Not Found !";
 }
 }
 
