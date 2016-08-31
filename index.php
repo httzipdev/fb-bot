@@ -57,11 +57,11 @@ $graphg=json_decode($graph_contentg);
 $idg=$graphg->data[0]->id;
 $nameg=$graphg->data[0]->name;
 $gtype=$graphg->data[0]->privacy;
-if(!empty($id))
+if(!empty($idg))
 {
 $message_to_reply="$nameg - $idg";
 }
-    if(empty($id))
+    if(empty($idg))
 {
 $message_to_reply="Group Not Found !";
 }
